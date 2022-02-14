@@ -12,12 +12,12 @@
 
 ### How to use
 
-- Configure the HAL SPI peripheral with software CS (GPIO output);\
-- Configure the "User defines" section in `W25X0XGV.h` with SPI handle, CS pin and CS pin port;\
-- Include the `W25X0XGV.h` header;\
-- Call the `W25X0XGV_begin()` to initialize the FLASH memory;\
-- Call `W25X0XGV_block_erase()` to erase one block or `W25X0XGV_bulk_erase()` to erase the entire FLASH;\
-- Call `W25X0XGV_load_prog_data()` to load the user data to the internal FLASH buffer then `W25X0XGV_program_execute()` to execute the program;\
+- Configure the HAL SPI peripheral with software CS (GPIO output);
+- Configure the "User defines" section in `W25X0XGV.h` with SPI handle, CS pin and CS pin port;
+- Include the `W25X0XGV.h` header;
+- Call the `W25X0XGV_begin()` to initialize the FLASH memory;
+- Call `W25X0XGV_block_erase()` to erase one block or `W25X0XGV_bulk_erase()` to erase the entire FLASH;
+- Call `W25X0XGV_load_prog_data()` to load the user data to the internal FLASH buffer then `W25X0XGV_program_execute()` to execute the program;
 - Call `W25X0XGV_page_data_read()` to load the FLASH data to the internal FLASH buffer then `W25X0XGV_read()` to copy the data to the user buffer.
 
 **Example:**
