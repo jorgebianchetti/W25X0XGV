@@ -4,19 +4,21 @@
 
 **Some observations:**
 
-- This library doesn't support SPI through interruption or DMA, only blocking mode.
-- Column selection is not implemented and ECC is always enabled, thus the data for read/write must be always 2048-bytes long.
-- SPI communication error handling is not implemented.
+- This library doesn't support SPI through interruption or DMA, only blocking mode;
+- Column selection is not implemented and ECC is always enabled, thus the data for read/write must be always 2048-bytes long;
+- SPI communication error handling is not implemented;
+- It is not necessary to specify the FLASH model, this is done automatically;
+- Always erase the block/entire memory before write.
 
 ### How to use
 
-\- Configure the HAL SPI peripheral with software CS (GPIO output);\
-\- Configure the "User defines" section in `W25X0XGV.h` with SPI handle, CS pin and CS pin port;\
-\- Include the `W25X0XGV.h` header;\
-\- Call the `W25X0XGV_begin()` function;\
-\- Call `W25X0XGV_block_erase()` to erase one block or `W25X0XGV_bulk_erase()` to erase the entire FLASH;\
-\- Call `W25X0XGV_load_prog_data()` to load the user data to the internal FLASH buffer then `W25X0XGV_program_execute()` to execute the program;\
-\- Call `W25X0XGV_page_data_read()` to load the FLASH data to the internal FLASH buffer then `W25X0XGV_read()` to copy the data to the user buffer.
+- Configure the HAL SPI peripheral with software CS (GPIO output);\
+- Configure the "User defines" section in `W25X0XGV.h` with SPI handle, CS pin and CS pin port;\
+- Include the `W25X0XGV.h` header;\
+- Call the `W25X0XGV_begin()` to initialize the FLASH memory;\
+- Call `W25X0XGV_block_erase()` to erase one block or `W25X0XGV_bulk_erase()` to erase the entire FLASH;\
+- Call `W25X0XGV_load_prog_data()` to load the user data to the internal FLASH buffer then `W25X0XGV_program_execute()` to execute the program;\
+- Call `W25X0XGV_page_data_read()` to load the FLASH data to the internal FLASH buffer then `W25X0XGV_read()` to copy the data to the user buffer.
 
 **Example:**
 
@@ -32,7 +34,7 @@ W25X0XGV_begin();
 // Erase the block that holds the page 0
 W25X0XGV_block_erase(0);
 
-// Load the content of data_to_program to page 0 of the FLASH
+// Write the content of data_to_program to page 0 of the FLASH
 uint8_t data_to_program[W25N01GV_STORAGE_PAGE_SIZ] = {0x01};
 
 W25X0XGV_load_prog_data(data_to_program, W25N01GV_STORAGE_PAGE_SIZ);
